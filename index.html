@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Event Planner AI | Weddings, birthdays &amp; community events</title>
+    <meta
+      name="description"
+      content="Get a personalised budget, timeline, vendor checklist and ideas for your wedding, birthday or community event, powered by Gemini."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="config.js"></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <p class="brand">Event Planner AI</p>
+    </header>
+
+    <main id="main" class="container">
+      <section aria-labelledby="intro-heading" class="intro">
+        <h1 id="intro-heading">Plan your event in minutes</h1>
+        <p>
+          Tell us about your wedding, birthday or community event. We'll draft a budget, timeline,
+          vendor checklist and ideas tailored to you.
+        </p>
+      </section>
+
+      <form id="plan-form" class="card" novalidate>
+        <div id="error-summary" class="error-summary" role="alert" tabindex="-1" hidden>
+          <p class="error-title" id="error-title"></p>
+          <ul id="error-list"></ul>
+        </div>
+
+        <fieldset>
+          <legend>Event type</legend>
+          <div class="radio-row">
+            <label class="radio"><input type="radio" name="eventType" value="wedding" checked /><span>Wedding</span></label>
+            <label class="radio"><input type="radio" name="eventType" value="birthday" /><span>Birthday</span></label>
+            <label class="radio"><input type="radio" name="eventType" value="community" /><span>Community event</span></label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="title">Event name</label>
+          <input id="title" name="title" type="text" maxlength="100" required placeholder="e.g. Aarav &amp; Meera's wedding" />
+          <p id="title-error" class="field-error" hidden></p>
+        </div>
+
+        <div class="grid">
+          <div class="field">
+            <label for="date">Event date</label>
+            <input id="date" name="date" type="date" required />
+            <p id="date-error" class="field-error" hidden></p>
+          </div>
+          <div class="field">
+            <label for="guestCount">Number of guests</label>
+            <input id="guestCount" name="guestCount" type="number" inputmode="numeric" min="1" max="5000" required />
+            <p id="guestCount-error" class="field-error" hidden></p>
+          </div>
+          <div class="field">
+            <label for="budget">Total budget</label>
+            <input id="budget" name="budget" type="number" inputmode="decimal" min="1" step="any" required />
+            <p id="budget-error" class="field-error" hidden></p>
+          </div>
+          <div class="field">
+            <label for="currency">Currency</label>
+            <select id="currency" name="currency">
+              <option value="INR" selected>INR</option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="location">City or area <span class="optional">(optional)</span></label>
+          <input id="location" name="location" type="text" maxlength="100" placeholder="e.g. Pune" />
+        </div>
+
+        <div class="field">
+          <label for="preferences">
+            Preferences, theme or special needs <span class="optional">(optional)</span>
+          </label>
+          <textarea
+            id="preferences"
+            name="preferences"
+            rows="4"
+            maxlength="600"
+            aria-describedby="preferences-hint"
+            placeholder="Vegetarian menu, outdoor venue, wheelchair access, traditional music..."
+          ></textarea>
+          <p id="preferences-hint" class="hint">0 / 600 characters</p>
+        </div>
+
+        <button type="submit" id="submit" class="button">Create my plan</button>
+      </form>
+
+      <div id="status" role="status" aria-live="polite" class="status"></div>
+      <div id="results"></div>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        Plans are AI-generated suggestions. Verify prices, availability and local requirements with
+        your vendors.
+      </p>
+    </footer>
+  </body>
+</html>
